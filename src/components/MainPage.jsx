@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { List } from './List';
 
 export const MainPage = () => {
     const [work,setWork] = useState("");
@@ -38,6 +39,7 @@ export const MainPage = () => {
             <input type="text" placeholder='Work' onChange={e=>setWork(e.target.value)}value ={work}/>
             <button type='submit' onClick={submitbtnOnClick}>+Add</button>
             <h1>*{duWork}</h1>
+            <List nWork = {workDetails.newWork}></List>
             </form>
         </div>
     </div>
