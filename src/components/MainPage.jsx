@@ -5,6 +5,7 @@ export const MainPage = () => {
     const [work,setWork] = useState("");
     const [workDetails,setWorkDetails]= useState("");
     const [todoList, setTodoList] = useState([]);
+    const [duTodoList, setDuTodoList] = useState([]);
     
     
     const handleOnSubmit =(e) =>{
@@ -33,11 +34,18 @@ export const MainPage = () => {
       for (const i of todoList) {
         if(i.id == id){
           setWork(i.task);
-        }
-      }
-     
+
+     }
 
     }
+  }
+  //Delete Work
+  const handleOnDelete =(id)=>{
+  const deleteData = todoList.filter((ele,index)=>{
+      return ele.id !== id
+    })
+    setTodoList(deleteData)
+}
 
     useEffect(()=>{
         localStorage.setItem('workDetails',JSON.stringify(workDetails))
@@ -55,12 +63,12 @@ export const MainPage = () => {
             <div>
   {todoList.map((todo) => {
     return (
-      <li
+      <li key={todo.id}
         id={todo.id}
-        onClick={() => handleComplete(todo.id)}
+        // onClick={() => handleComplete(todo.id)}
         >
         {todo.task}
-        <button>-</button>
+        <button onClick={()=>handleOnDelete(todo.id)}>-</button>
         <button>u</button>
         <button>c</button>
       </li>
