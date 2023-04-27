@@ -30,6 +30,12 @@ export const MainPage = () => {
     }
     const handleComplete =(id)=>{
       alert("id : "+id);
+      for (const i of todoList) {
+        if(i.id == id){
+          setWork(i.task);
+        }
+      }
+     
 
     }
 
@@ -54,6 +60,9 @@ export const MainPage = () => {
         onClick={() => handleComplete(todo.id)}
         >
         {todo.task}
+        <button>-</button>
+        <button>u</button>
+        <button>c</button>
       </li>
     );
   })}
