@@ -30,7 +30,7 @@ export const MainPage = () => {
         
     }
     const handleComplete =(id)=>{
-      alert("id : "+id);
+  
       for (const i of todoList) {
         if(i.id == id){
           setWork(i.task);
@@ -39,6 +39,7 @@ export const MainPage = () => {
 
     }
   }
+
   //Delete Work
   const handleOnDelete =(id)=>{
   const deleteData = todoList.filter((ele,index)=>{
@@ -46,6 +47,17 @@ export const MainPage = () => {
     })
     setTodoList(deleteData)
 }
+
+// update Work
+const handleOnUpdate = (id, newWork) => {
+  const updatedTodos = todoList.map(todo => {
+    if (todo.id === id) {
+      return { ...todo, task: newWork };
+    }
+    return todo;
+  });
+  setTodoList(updatedTodos);
+};
 
     useEffect(()=>{
         localStorage.setItem('workDetails',JSON.stringify(workDetails))
@@ -69,7 +81,7 @@ export const MainPage = () => {
         >
         {todo.task}
         <button onClick={()=>handleOnDelete(todo.id)}>-</button>
-        <button>u</button>
+        <button onClick={()=>handleOnUpdate(todo.id,"sksks")}>u</button>
         <button>c</button>
       </li>
     );
