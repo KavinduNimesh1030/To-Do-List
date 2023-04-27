@@ -5,14 +5,14 @@ export const List = () => {
 
   useEffect(()=>{
     console.log("component loaded")
-    const data = localStorage.getItem('formDetails')
+    const data = localStorage.getItem('workDetails')
     setWorkData(JSON.parse(data))   
   },[])
 
   return (
     <div>
-      {}
-        <li></li>
+        <li>Hello</li>
+        <li>{workData.newWork}</li>
     </div>
   )
 }

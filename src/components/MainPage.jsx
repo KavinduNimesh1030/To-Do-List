@@ -5,6 +5,7 @@ export const MainPage = () => {
     const [work,setWork] = useState("");
     const [duWork,setDuWork] = useState("");
     const [workDetails,setWorkDetails]= useState("");
+    const [todoList, setTodoList] = useState([]);
     
     
     const handleOnSubmit =(e) =>{
@@ -14,6 +15,17 @@ export const MainPage = () => {
             newWork : work
         }
 
+        const id = todoList.length + 1;
+        setTodoList((prev) => [
+          ...prev,
+          {
+            id: id,
+            task: work,
+            complete: false,
+          },
+        ]);
+        setWork("");
+
       setWorkDetails([...workDetails,workList]);    
         
     }
@@ -22,11 +34,9 @@ export const MainPage = () => {
         localStorage.setItem('workDetails',JSON.stringify(workDetails))
     },[workDetails])
 
-    const submitbtnOnClick =()=> {
-        alert("sss");
-
+    const submitbtnOnClick =(e)=> {
         const newList  = localStorage.getItem("workDetails");
-        console.log(newList);
+        console.log("newList"+newList);
         setDuWork(newList.newWork);
 
     }
@@ -39,7 +49,16 @@ export const MainPage = () => {
             <input type="text" placeholder='Work' onChange={e=>setWork(e.target.value)}value ={work}/>
             <button type='submit' onClick={submitbtnOnClick}>+Add</button>
             <h1>*{duWork}</h1>
-            <List nWork = {workDetails.newWork}></List>
+            <ul>
+  {todoList.map((todo) => {
+    return (
+      <li
+      >
+        {todo.task}
+      </li>
+    );
+  })}
+</ul>;
             </form>
         </div>
     </div>
