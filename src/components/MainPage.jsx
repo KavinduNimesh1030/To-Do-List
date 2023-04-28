@@ -7,18 +7,20 @@ export const MainPage = () => {
     const [todoList, setTodoList] = useState([]);
     const [duTodoList, setDuTodoList] = useState([]);
     const [updateTask, setUpdateTask] = useState(false);
+    const [listId,setListId] = useState();
     
     
-    const handleOnSubmit =(e,uId,newWork) =>{
-     
-        
+    const handleOnSubmit =(e) =>{
+
+        e.preventDefault();
+
         const workList = {
             newWork : work
         }
 
-      if(!updateTask){
-        e.preventDefault();
-        alert("read");
+        var btn = document.getElementById("btnSubmit").innerText;
+
+      if(btn == "+Add"){
         const id = todoList.length + 1;
         setTodoList((prev) => [
           ...prev,
@@ -29,7 +31,19 @@ export const MainPage = () => {
           },
         ]);
         setWork("");
+      }else{
+
+      const updatedTodos = todoList.map(todo => {
+      if (todo.id === listId) {
+        return { ...todo, task: work};
       }
+      return todo;
+    });
+    setTodoList(updatedTodos);
+    document.getElementById("btnSubmit").innerText ="+Add"
+    setWork("");
+
+   }
 
       setWorkDetails([...workDetails,workList]);    
         
@@ -48,24 +62,31 @@ export const MainPage = () => {
   //Delete Work
   const handleOnDelete =(id)=>{
   const deleteData = todoList.filter((ele,index)=>{
+    alert(ele.task);
       return ele.id !== id
     })
     setTodoList(deleteData)
 }
 
 // update Work
-const handleOnUpdate = (id,newWork) => {
-    setUpdateTask(true);
-    setWork("ABc");
+const handleOnUpdate = (id) => {
 
-    // handleOnSubmit(id,newWork);
-    // const updatedTodos = todoList.map(todo => {
-    //   if (todo.id === id) {
-    //     return { ...todo, task: newWork };
-    //   }
-    //   return todo;
-    // });
-    // setTodoList(updatedTodos);
+  //set detail in to textfeild that want to update
+   todoList.filter((ele,index)=>{
+    if(ele.id == id){
+      alert(ele.task);
+      setWork(ele.task);
+      return ele.task;
+    }
+     
+    })
+    setUpdateTask(true);
+   
+    //set id in selected object
+    setListId(id);
+
+    //Change main button text 
+    document.getElementById("btnSubmit").innerText ="Update"
 };
 
     useEffect(()=>{
@@ -90,7 +111,7 @@ const handleOnUpdate = (id,newWork) => {
         >
         {todo.task}
         <button onClick={()=>handleOnDelete(todo.id)}>-</button>
-        <button onClick={()=>handleOnUpdate(todo.id,"kavindu")} type='button'>u</button>
+        <button onClick={()=>handleOnUpdate(todo.id)} id={todo.id} type='button'>u</button>
         <button>c</button>
       </li>
     );
