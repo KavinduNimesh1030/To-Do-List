@@ -17,10 +17,13 @@ export const MainPage = () => {
         }
 
         var btn = document.getElementById("btnSubmit").innerText;
-
+      
+      //if btn inner text == +Add,we Add new task
       if(btn == "+Add"){
+
+        //genarate new id 
         const id = todoList.length + 1;
-        
+
         setTodoList((prev) => [
           ...prev,
           {
@@ -30,8 +33,10 @@ export const MainPage = () => {
           },
         ]);
         setWork("");
-      }else{
 
+      }else{
+        
+      //id btn inner text not equal to +Add, we update the task
       const updatedTodos = todoList.map(todo => {
       if (todo.id === listId) {
         return { ...todo, task: work};
@@ -48,20 +53,23 @@ export const MainPage = () => {
         
     }
 
-    const handleComplete =(id)=>{
-  
-      for (const i of todoList) {
-        if(i.id == id){
-          setWork(i.task);
+    //completed task
+    const handleOnComplete =(id)=>{
+      const completedTodos = todoList.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, task: "complete"};
+        }
+        return todo;
+      });
+      setTodoList(completedTodos);
 
-     }
-
-    }
-  }
-  //const handleOnComplete 
-  const handleOnComplete =(id)=>{
+      // document.body.className = "AnErrorHasOccured";
+      document.getElementById(id).className = "AnErrorHasOccured";
+      document.getElementById("btnSubmit").innerText ="sss"
      
   }
+  
+ 
 
   //Delete Work
   const handleOnDelete =(id)=>{
@@ -83,8 +91,6 @@ const handleOnUpdate = (id) => {
     }
      
     })
-  
-   
     //set id in selected object
     setListId(id);
 
@@ -110,12 +116,13 @@ const handleOnUpdate = (id) => {
     return (
       <li 
         id={todo.id}
+        key={todo.id}
         // onClick={() => handleComplete(todo.id)}
         >
         {todo.task}
         <button onClick={()=>handleOnDelete(todo.id)}>-</button>
         <button onClick={()=>handleOnUpdate(todo.id)} id={todo.id} type='button'>u</button>
-        <button onClick ={()=>handleOnComplete(todo.id)}>c</button>
+        <button onClick ={()=>handleOnComplete(todo.id)} id ={todo.id}>c</button>
       </li>
     );
   })}
