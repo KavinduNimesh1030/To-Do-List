@@ -5,8 +5,6 @@ export const MainPage = () => {
     const [work,setWork] = useState("");
     const [workDetails,setWorkDetails]= useState("");
     const [todoList, setTodoList] = useState([]);
-    const [duTodoList, setDuTodoList] = useState([]);
-    const [updateTask, setUpdateTask] = useState(false);
     const [listId,setListId] = useState();
     
     
@@ -22,6 +20,7 @@ export const MainPage = () => {
 
       if(btn == "+Add"){
         const id = todoList.length + 1;
+        
         setTodoList((prev) => [
           ...prev,
           {
@@ -48,6 +47,7 @@ export const MainPage = () => {
       setWorkDetails([...workDetails,workList]);    
         
     }
+
     const handleComplete =(id)=>{
   
       for (const i of todoList) {
@@ -58,11 +58,14 @@ export const MainPage = () => {
 
     }
   }
+  //const handleOnComplete 
+  const handleOnComplete =(id)=>{
+     
+  }
 
   //Delete Work
   const handleOnDelete =(id)=>{
   const deleteData = todoList.filter((ele,index)=>{
-    alert(ele.task);
       return ele.id !== id
     })
     setTodoList(deleteData)
@@ -74,13 +77,13 @@ const handleOnUpdate = (id) => {
   //set detail in to textfeild that want to update
    todoList.filter((ele,index)=>{
     if(ele.id == id){
-      alert(ele.task);
+
       setWork(ele.task);
       return ele.task;
     }
      
     })
-    setUpdateTask(true);
+  
    
     //set id in selected object
     setListId(id);
@@ -112,7 +115,7 @@ const handleOnUpdate = (id) => {
         {todo.task}
         <button onClick={()=>handleOnDelete(todo.id)}>-</button>
         <button onClick={()=>handleOnUpdate(todo.id)} id={todo.id} type='button'>u</button>
-        <button>c</button>
+        <button onClick ={()=>handleOnComplete(todo.id)}>c</button>
       </li>
     );
   })}
