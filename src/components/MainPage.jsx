@@ -35,7 +35,7 @@ export const MainPage = () => {
         setWork("");
 
       }else{
-        
+
       //id btn inner text not equal to +Add, we update the task
       const updatedTodos = todoList.map(todo => {
       if (todo.id === listId) {
@@ -57,7 +57,8 @@ export const MainPage = () => {
     const handleOnComplete =(id)=>{
       const completedTodos = todoList.map(todo => {
         if (todo.id === id) {
-          return { ...todo, task: "complete"};
+          var t =todo.task;
+          return { ...todo, complete : true};
         }
         return todo;
       });
