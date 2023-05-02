@@ -105,11 +105,11 @@ const handleOnUpdate = (id) => {
 
    
   return (
-    <div>
+    <div id='mainDiv'>
         <div>
-            <h1>My To-Do List</h1>
+            <h1 id='lblMain'>My To-Do List</h1>
             <form id='mainForm' onSubmit={handleOnSubmit}>
-            <input type="text" placeholder='Work' onChange={e=>setWork(e.target.value)}value ={work}/>
+            <input type="text" placeholder='Work' id='txtTask' onChange={e=>setWork(e.target.value)}value ={work}/>
             <button type='submit' id='btnSubmit'>+Add</button>
             
             <div>
