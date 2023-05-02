@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { List } from './List';
-
+import './MainPage.css'
 export const MainPage = () => {
     const [work,setWork] = useState("");
     const [workDetails,setWorkDetails]= useState("");
@@ -16,7 +16,7 @@ export const MainPage = () => {
             newWork : work
         }
 
-        var btn = document.getElementById("btnSubmit").innerText;
+      var btn = document.getElementById("btnSubmit").innerText;
       
       //if btn inner text == +Add,we Add new task
       if(btn == "+Add"){
