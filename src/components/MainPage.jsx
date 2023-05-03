@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { List } from './List';
 import './MainPage.css'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckSquare, faCoffee, faDeleteLeft, faPencil, faRecycle, faRightLeft, faTrash } from '@fortawesome/free-solid-svg-icons'
+
+
+
 export const MainPage = () => {
     const [work,setWork] = useState("");
     const [workDetails,setWorkDetails]= useState("");
     const [todoList, setTodoList] = useState([]);
     const [listId,setListId] = useState();
+    const [completeTask,setCompleteTask] = useState();
     
     
     const handleOnSubmit =(e) =>{
@@ -39,7 +46,7 @@ export const MainPage = () => {
       //id btn inner text not equal to +Add, we update the task
       const updatedTodos = todoList.map(todo => {
       if (todo.id === listId) {
-        return { ...todo, task: work};
+        return { ...todo, task: work ,complete : completeTask};
       }
       return todo;
     });
@@ -55,18 +62,23 @@ export const MainPage = () => {
 
     //completed task
     const handleOnComplete =(id)=>{
-      const completedTodos = todoList.map(todo => {
+      var t = '';
+      
+      todoList.map(todo => {
         if (todo.id === id) {
-          var t =todo.task;
-          return { ...todo, complete : true};
+          t =todo.task;
         }
-        return todo;
+       
       });
-      setTodoList(completedTodos);
+      // setTodoList(completedTodos);
+
+        setWork(t)
+       setListId(id);
+       setCompleteTask(true);
 
       // document.body.className = "AnErrorHasOccured";
       document.getElementById(id).className = "AnErrorHasOccured";
-      document.getElementById("btnSubmit").innerText ="sss"
+      document.getElementById("btnSubmit").innerText ="aa"
      
   }
   
@@ -105,6 +117,7 @@ const handleOnUpdate = (id) => {
 
    
   return (
+    
     <div id='mainDiv'>
         <div>
             <h1 id='lblMain'>My To-Do List</h1>
@@ -121,9 +134,17 @@ const handleOnUpdate = (id) => {
         // onClick={() => handleComplete(todo.id)}
         >
         {todo.task}
-        <button onClick={()=>handleOnDelete(todo.id)}>-</button>
-        <button onClick={()=>handleOnUpdate(todo.id)} id={todo.id} type='button'>u</button>
-        <button onClick ={()=>handleOnComplete(todo.id)} id ={todo.id}>c</button>
+ 
+     <button onClick={()=>handleOnDelete(todo.id)}>
+        <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button onClick={()=>handleOnUpdate(todo.id)} id={todo.id} type='button'>
+        <FontAwesomeIcon icon={faPencil} />
+        </button>
+        <button onClick ={()=>handleOnComplete(todo.id)} id ={todo.id}>
+        <FontAwesomeIcon icon={faCheckSquare} />
+        </button>
+  
       </li>
     );
   })}
