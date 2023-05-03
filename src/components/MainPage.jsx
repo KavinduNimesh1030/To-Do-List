@@ -18,6 +18,7 @@ export const MainPage = () => {
     const handleOnSubmit =(e) =>{
 
         e.preventDefault();
+        var id = todoList.length + 1;
 
         const workList = {
             newWork : work
@@ -29,7 +30,7 @@ export const MainPage = () => {
       if(btn == "+Add"){
 
         //genarate new id 
-        const id = todoList.length + 1;
+     
 
         setTodoList((prev) => [
           ...prev,
@@ -54,6 +55,7 @@ export const MainPage = () => {
     document.getElementById("btnSubmit").innerText ="+Add"
     setWork("");
 
+
    }
 
       setWorkDetails([...workDetails,workList]);    
@@ -77,7 +79,7 @@ export const MainPage = () => {
        setCompleteTask(true);
 
       // document.body.className = "AnErrorHasOccured";
-      document.getElementById(id).className = "AnErrorHasOccured";
+      document.getElementById(id).className = "liCompleted";
       document.getElementById("btnSubmit").innerText ="aa"
      
   }

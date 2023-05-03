@@ -1,8 +1,15 @@
 
-li.AnErrorHasOccured
+li.liCompleted
 {
-  background: #f00;
+  background:#00ff72d9;
 }
+li.liCompleted>div>button:first-child{
+    display: none;
+}
+li.liCompleted>div>button:nth-child(2){
+    display: none;
+}
+
 li
 {
     padding-left: 5px;
