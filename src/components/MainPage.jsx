@@ -122,7 +122,7 @@ const handleOnUpdate = (id) => {
         <div>
             <h1 id='lblMain'>My To-Do List</h1>
             <form id='mainForm' onSubmit={handleOnSubmit}>
-            <input type="text" placeholder='Work' id='txtTask' onChange={e=>setWork(e.target.value)}value ={work}/>
+            <input type="text" placeholder='Add Task' id='txtTask' onChange={e=>setWork(e.target.value)}value ={work}/>
             <button type='submit' id='btnSubmit'>+Add</button>
             
             <div>
@@ -135,7 +135,8 @@ const handleOnUpdate = (id) => {
         >
         {todo.task}
  
-     <button onClick={()=>handleOnDelete(todo.id)}>
+    <div id='listBtnDiv'>
+    <button onClick={()=>handleOnDelete(todo.id)}>
         <FontAwesomeIcon icon={faTrash} />
         </button>
         <button onClick={()=>handleOnUpdate(todo.id)} id={todo.id} type='button'>
@@ -144,6 +145,7 @@ const handleOnUpdate = (id) => {
         <button onClick ={()=>handleOnComplete(todo.id)} id ={todo.id}>
         <FontAwesomeIcon icon={faCheckSquare} />
         </button>
+    </div>
   
       </li>
     );
